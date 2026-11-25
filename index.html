@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weamigoss</title>
+<meta name="description" content="Weamigoss — an independent production house creating films, music and visual stories.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#080808;color:#f4f1eb;font-family:Inter,Arial,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{width:min(1180px,92%);margin:auto}
+nav{position:fixed;z-index:20;top:18px;left:50%;transform:translateX(-50%);width:min(1100px,92%);padding:12px 18px;border:1px solid #ffffff18;border-radius:22px;background:#090909b8;backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:space-between}
+nav img{height:38px;width:auto}
+nav .links{display:flex;gap:24px;font-size:13px;text-transform:uppercase;letter-spacing:.12em}
+nav a{opacity:.78} nav a:hover{opacity:1}
+.mobile-menu-btn{display:none;width:42px;height:42px;border:1px solid #ffffff18;border-radius:50%;background:#ffffff08;color:#eee;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
+.mobile-menu{position:fixed;z-index:19;top:78px;right:4%;width:min(280px,88vw);padding:14px;border:1px solid #ffffff18;border-radius:20px;background:#090909e8;backdrop-filter:blur(20px);opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .35s ease,transform .35s ease,visibility .35s ease}
+.mobile-menu.is-open{opacity:1;visibility:visible;transform:translateY(0)}
+.mobile-menu a{display:block;padding:13px 12px;border-bottom:1px solid #ffffff0d;text-transform:uppercase;letter-spacing:.12em;font-size:11px}.mobile-menu a:last-child{border-bottom:0}
+.hero{min-height:100vh;display:grid;place-items:center;position:relative;overflow:hidden;background:#080808}
+.hero-old-after-disabled{content:"";position:absolute;inset:0;background:linear-gradient(transparent 70%,#080808);pointer-events:none}
+.hero-inner{text-align:center;position:relative;z-index:2}
+.hero-logo{width:min(390px,72vw);margin:0 auto 28px;filter:drop-shadow(0 20px 50px #000)}
+.kicker{text-transform:uppercase;letter-spacing:.28em;font-size:11px;color:#aaa;margin-bottom:14px}
+.hero h1{font-size:clamp(44px,8vw,94px);line-height:.95;letter-spacing:-.06em}
+.hero p{margin:22px auto 30px;max-width:600px;color:#aaa}
+.btn{display:inline-flex;padding:13px 20px;border:1px solid #ffffff2b;border-radius:999px;background:#ffffff0d;margin:5px;text-transform:uppercase;letter-spacing:.12em;font-size:11px}
+.btn:hover{background:#fff;color:#000}.project-body .btn{margin-top:8px}
+section{padding:110px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:42px}
+.eyebrow{color:#8e8e8e;text-transform:uppercase;letter-spacing:.2em;font-size:10px}
+h2{font-size:clamp(34px,5vw,64px);letter-spacing:-.045em;line-height:1}
+.lead{max-width:700px;color:#aaa;font-size:18px}
+.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px}
+.glass{background:#ffffff08;border:1px solid #ffffff12;border-radius:24px;padding:30px;backdrop-filter:blur(12px)}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.project{overflow:hidden;padding:0}
+.project img{width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .5s}
+.project:hover img{transform:scale(1.035)}
+.project-body{padding:25px}
+.project-body h3{font-size:28px}
+.muted{color:#8f8f8f}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.tag{border:1px solid #ffffff18;border-radius:99px;padding:5px 9px;font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.1em}
+.up-placeholder{height:190px;border:1px solid #ffffff12;border-radius:14px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#111,#0a0a0a);color:#777;font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+.upcoming{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.up-card{min-height:230px;display:flex;flex-direction:column;justify-content:flex-end}
+.up-card{overflow:hidden}.up-card img{transition:transform .5s ease;transform-origin:center center}.up-card:hover img{transform:scale(1.035)}
+.up-card h3{font-size:24px}.year{color:#777;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.audio{display:grid;grid-template-columns:.7fr 1.3fr;gap:30px;align-items:center}
+.audio img{width:100%;max-width:450px;border-radius:24px}
+.listen-wrap{margin-top:22px;display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.listen-label{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#888;margin-right:2px}
+.platform-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border:1px solid #ffffff20;border-radius:999px;background:#ffffff08;color:#eee;font:inherit;font-size:10px;text-transform:uppercase;letter-spacing:.1em;cursor:pointer;transition:transform .35s ease,background .35s ease,border-color .35s ease,opacity .35s ease}
+.platform-btn svg{width:14px;height:14px;display:block;fill:currentColor}
+.platform-btn:not(:disabled):hover{transform:translateY(-2px);background:#fff;color:#000;border-color:#fff}
+.platform-btn:disabled{opacity:.48;cursor:default}
+.bts-link{display:inline-flex;align-items:center;gap:7px;margin-top:14px;color:#ddd;font-size:11px;text-transform:uppercase;letter-spacing:.12em;border-bottom:1px solid #ffffff35;padding-bottom:4px;transition:opacity .35s ease,border-color .35s ease,transform .35s ease}
+.bts-link:hover{opacity:1;border-color:#fff;transform:translateX(3px)}
+.bts-link span{font-size:13px}
+.bts-modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.72);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s ease}
+.bts-modal.is-open{opacity:1;visibility:visible}
+.bts-modal-card{width:min(900px,94vw);max-height:88vh;overflow:auto;background:#0b0b0bdd;border:1px solid #ffffff18;border-radius:24px;padding:28px;transform:translateY(18px) scale(.985);transition:transform .55s cubic-bezier(.22,.61,.36,1)}
+.bts-modal.is-open .bts-modal-card{transform:translateY(0) scale(1)}
+.bts-modal-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
+.bts-close{width:36px;height:36px;border:1px solid #ffffff18;border-radius:50%;background:#ffffff08;color:#eee;cursor:pointer;font-size:18px;transition:transform .3s ease,background .3s ease}
+.bts-close:hover{transform:rotate(90deg);background:#fff;color:#000}
+.bts-empty{min-height:240px;border:1px dashed #ffffff18;border-radius:18px;display:grid;place-items:center;text-align:center;color:#777;padding:30px}
+
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.person{min-height:190px;display:flex;flex-direction:column;justify-content:end}
+.person h3{font-size:19px}.person p{color:#888;font-size:12px}
+.craft{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.craft .glass{min-height:150px}.craft h3{margin-bottom:8px}
+.case{border-top:1px solid #ffffff12}
+.case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.case .glass h3{font-size:24px;margin-bottom:10px}
+.credits{columns:2;column-gap:50px}.credits p{break-inside:avoid;margin-bottom:13px;color:#aaa}.credits strong{color:#eee}
+footer{border-top:1px solid #ffffff12;padding:60px 0;color:#777}
+.footer-row{display:flex;justify-content:space-between;gap:20px}
+.social{display:flex;gap:15px}
+.small{text-transform:uppercase;letter-spacing:.14em;font-size:10px}
+@media(max-width:850px){
+ nav .links{display:none}
+ .mobile-menu-btn{display:flex}
+ .about-grid,.audio,.case-grid{grid-template-columns:1fr}
+ .cards{grid-template-columns:1fr}
+ .upcoming{grid-template-columns:1fr}
+ .team{grid-template-columns:repeat(2,1fr)}
+ .craft{grid-template-columns:repeat(2,1fr)}
+ .section-head{display:block}
+ .section-head .lead{margin-top:18px}
+ .credits{columns:1}
+}
+@media(max-width:520px){
+ section{padding:80px 0}
+ .team,.craft{grid-template-columns:1fr}
+ .hero h1{font-size:48px}
+}
+
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:#070707}
+.hero-bg{position:absolute;inset:0;background-image:url("assets/hero-team.jpg");background-size:cover;background-position:center;opacity:.50;filter:saturate(.72) contrast(1.04)}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,.38) 52%,rgba(0,0,0,.62) 100%),linear-gradient(0deg,rgba(0,0,0,.72),transparent 42%,rgba(0,0,0,.42))}
+.hero-inner{width:min(1180px,92%);margin:auto;text-align:left;position:relative;z-index:2;padding-top:90px}
+.hero-year{font-size:11px;letter-spacing:.22em;color:#bdbdbd;text-transform:uppercase;margin-bottom:22px}
+.hero-logo{width:min(720px,70vw);height:auto;max-height:245px;object-fit:contain;object-position:left center;margin:0 0 22px;filter:none}
+.hero h1{font-size:clamp(38px,5.3vw,76px);line-height:.98;letter-spacing:-.055em;font-weight:700}
+.hero h1 span{color:#777}
+.hero-actions{margin-top:32px;display:flex;align-items:center;gap:20px}
+.btn.primary{background:#f4f1eb;color:#090909;border-color:#f4f1eb}
+.text-btn{font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:#eee}
+.text-btn b,.btn b{font-size:15px;margin-left:8px}
+.scroll-cue{position:absolute;z-index:3;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:9px;color:#888;font-size:9px;letter-spacing:.25em}
+.scroll-cue i{width:1px;height:34px;background:#777;display:block}
+nav img{height:50px;width:auto;filter:none}
+
+
+.hero:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+@media(max-width:850px){
+ .hero-inner{padding-top:80px}
+ .hero-logo{width:min(620px,88vw)}
+}
+
+
+/* Latest Weamigoss refinements */
+.hero-logo{width:min(576px,49vw);max-height:205px;margin-bottom:24px}
+.team{grid-template-columns:repeat(4,1fr)}
+.person-photo{padding:0;overflow:hidden;min-height:390px;position:relative;background:#0d0d0d}
+.person-photo>img{width:100%;height:100%;min-height:390px;object-fit:cover;object-position:center top;transition:transform .7s ease,filter .7s ease}
+.person-photo:hover>img{transform:scale(1.035);filter:saturate(.9)}
+.person-info{position:absolute;left:0;right:0;bottom:0;padding:70px 22px 22px;background:linear-gradient(transparent,rgba(0,0,0,.94))}
+.person-info h3{font-size:19px}
+.person-info p{color:#b1b1b1;font-size:12px;margin-top:4px}
+.placeholder-person{display:flex;align-items:center;justify-content:center}
+.placeholder-person .person-info{z-index:2}
+.coming{color:#666;font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+.life-case{position:relative;overflow:visible;background:#050505;isolation:isolate}
+.life-case-bg{position:absolute;top:0;left:0;width:100%;aspect-ratio:16/9;background-color:#050505;background-image:linear-gradient(rgba(8,8,8,.5),rgba(8,8,8,.5)),url("assets/life-poster.jpeg");background-size:100% 100%;background-repeat:no-repeat;background-position:center top;opacity:.5;filter:saturate(.7);pointer-events:none;transition:filter .9s cubic-bezier(.22,.61,.36,1),opacity .9s ease,transform .9s cubic-bezier(.22,.61,.36,1);will-change:filter,opacity,transform}
+/* When Full Cast & Crew is open, keep the LIFE poster visually fixed only while the LIFE section is on screen. */
+.life-case:has(.full-credits-toggle details.is-open) .life-case-bg{position:absolute;top:0;left:0;width:100%;height:auto;aspect-ratio:16/9;z-index:0;background-size:100% 100%;background-position:center top;filter:saturate(.7) blur(5px);opacity:.42;transform:scale(1.005)}
+.life-case>.container{position:relative;z-index:2}
+@media(max-width:1050px){.team{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){
+ .hero-logo{width:92vw;max-height:240px}
+ .team{grid-template-columns:1fr}
+ .person-photo,.person-photo>img{min-height:440px}
+}
+
+
+.achievement-card{display:grid;grid-template-columns:1.35fr .65fr;gap:18px;align-items:stretch;max-width:1100px}
+.achievement-image{overflow:hidden;border:1px solid #ffffff12;border-radius:24px;background:#111}
+.achievement-image img{width:100%;height:100%;min-height:340px;object-fit:cover;object-position:center;transition:transform .7s ease}
+.achievement-card:hover .achievement-image img{transform:scale(1.025)}
+.achievement-copy{display:flex;flex-direction:column;justify-content:center}
+@media(max-width:850px){.achievement-card{grid-template-columns:1fr}.achievement-image img{min-height:250px}}
+
+
+.full-credits-toggle{margin-top:18px}.full-credits-toggle details{border:1px solid #ffffff14;border-radius:22px;background:#ffffff06;overflow:hidden}.full-credits-toggle summary{list-style:none;cursor:pointer;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:#eee}.full-credits-toggle summary::-webkit-details-marker{display:none}.full-credits-toggle summary span{font-size:16px;color:#888;transition:transform .3s ease}.full-credits-toggle details.is-open summary span{transform:rotate(90deg)}.full-credits-panel{border-top:1px solid #ffffff10;padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:45px}.full-credit-group .eyebrow{margin-bottom:16px}.full-credit-list{display:flex;flex-direction:column}.full-credit-list div{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid #ffffff0d}.full-credit-list div:last-child{border-bottom:0}.full-credit-list strong{font-size:14px;color:#eee}.full-credit-list span{font-size:12px;color:#888;text-align:right}@media(max-width:700px){.full-credits-panel{grid-template-columns:1fr;padding:22px}.full-credit-list div{display:block}.full-credit-list span{display:block;text-align:left;margin-top:3px}}
+
+/* V12 refinements */
+.hero-logo-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  width:100%;
+  margin:0 0 52px;
+}
+.hero-logo{
+  display:block;
+  width:min(881px,47vw);
+  max-height:252px;
+  height:auto;
+  object-fit:contain;
+  object-position:left center;
+  margin:0;
+  filter:drop-shadow(0 8px 22px rgba(0,0,0,.22));
+}
+.hero-logo + *{margin-top:0}
+@media(max-width:700px){
+  .hero-logo-wrap{justify-content:flex-start;margin-bottom:40px}
+  .hero-logo{width:min(566px,45vw);max-height:114px}
+}
+
+
+.full-credits-toggle details.is-open{
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255,255,255,.08), transparent 30%),
+    radial-gradient(circle at 85% 75%, rgba(130,105,75,.12), transparent 35%),
+    linear-gradient(135deg, #171512 0%, #0b0b0b 52%, #14110d 100%);
+}
+.full-credits-toggle details{
+  background:#ffffff06;
+}
+.full-credits-panel{
+  position:relative;
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transform:translateY(-10px);
+  padding-top:0;
+  padding-bottom:0;
+  background:
+    linear-gradient(rgba(8,8,8,.76),rgba(8,8,8,.88)),
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.07), transparent 55%);
+}
+.full-credits-toggle details.is-open .full-credits-panel{
+  padding-top:30px;
+  padding-bottom:30px;
+}
+@media(max-width:700px){.full-credits-toggle details.is-open .full-credits-panel{padding-top:22px;padding-bottom:22px}}
+
+
+.portrait-credit-list{gap:8px}
+.portrait-credit{
+  display:flex !important;
+  align-items:center;
+  justify-content:flex-start !important;
+  gap:13px;
+  padding:9px 0 !important;
+}
+.portrait-credit img,.portrait-placeholder{
+  width:72px;
+  height:96px;
+  flex:0 0 72px;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:9px;
+  border:1px solid #ffffff16;
+  background:linear-gradient(135deg,#26221d,#111);
+}
+.portrait-credit div:last-child{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+.portrait-credit span{text-align:left !important}
+.portrait-credit img.portrait-nived{
+  object-position:center center;
+  object-fit:cover;
+  display:block;
+  overflow:hidden;
+  clip-path:inset(0 round 9px);
+}
+
+@media(max-width:700px){
+  .portrait-credit img,.portrait-placeholder{width:58px;height:77px;flex-basis:58px}
+}
+
+
+/* Smooth cinematic motion */
+body{overflow-x:hidden}
+a,.btn,.text-btn,.glass,.project img,.person-photo>img{transition:all .45s cubic-bezier(.22,.61,.36,1)}
+section{scroll-margin-top:90px}
+.glass{transition:transform .45s cubic-bezier(.22,.61,.36,1),border-color .45s ease,background .45s ease}
+.glass:hover{border-color:#ffffff1c}
+.full-credits-toggle details{transition:background .5s ease,border-color .5s ease}
+
+.release-section{margin-top:34px}
+.release-section>h3{font-size:22px;margin:0 0 16px}
+.release-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.release-card{padding:20px 20px 18px;border:1px solid #ffffff12;border-radius:20px;background:linear-gradient(145deg,#ffffff08,#ffffff03);transition:transform .45s cubic-bezier(.22,.61,.36,1),border-color .45s ease,background .45s ease}
+.release-card:hover{transform:translateY(-3px);border-color:#ffffff22;background:#ffffff09}
+.release-card .eyebrow{margin-bottom:8px}
+.release-card h4{font-size:19px;line-height:1.2;margin:0 0 5px}
+.release-card .track-by{font-size:12px;color:#9d9d9d;margin:0}
+.release-card .listen-wrap{margin-top:16px;gap:7px}
+.release-card .listen-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#b8b8b8;margin-right:3px}
+.platform-btn.link-btn{text-decoration:none}
+@media(max-width:700px){.release-grid{grid-template-columns:1fr}.release-card{padding:18px}}
+
+    .btech-collection-card{grid-column:1 / -1;}
+    .btech-track-list{margin-top:18px;border-top:1px solid #ffffff12;}
+    .btech-track{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 0;border-bottom:1px solid #ffffff12;}
+    .btech-track:last-child{border-bottom:0;padding-bottom:2px;}
+    .btech-track strong{display:block;font-size:15px;}
+    .btech-track span{display:block;color:var(--muted);font-size:12px;margin-top:4px;}
+    @media(max-width:700px){.btech-track{align-items:flex-start;flex-direction:column;}.btech-track .platform-btn{width:max-content;}}
+@media(max-width:850px){
+  /* Mobile hero: keep the actual image crystal clear; blur only the extended top/bottom areas. */
+  .hero-bg{background:none;background-color:#070707;overflow:hidden;z-index:0;}
+  .hero-bg::before{content:"";position:absolute;inset:-34px;background-image:url("assets/hero-team.jpg");background-size:cover;background-position:center;background-repeat:no-repeat;filter:blur(24px);transform:scale(1.08);opacity:.78;z-index:0;}
+  .hero-bg::after{content:"";position:absolute;inset:0;background-image:url("assets/hero-team.jpg");background-size:contain;background-position:center center;background-repeat:no-repeat;z-index:1;}
+  .hero-inner{padding-top:105px;padding-bottom:70px;}
+  nav{top:12px;padding:9px 12px 9px 14px;border-radius:18px;}
+  nav img{height:40px;}
+}
+@media(max-width:520px){
+  .hero-inner{width:88%;padding-top:95px;}
+  .hero-year{font-size:9px;letter-spacing:.16em;}
+  .hero h1{font-size:43px;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#home"><img src="assets/weamigoss-logo-transparent.png" alt="Weamigoss"></a>
+  <div class="links">
+    <a href="#about">About</a><a href="#work">Film</a><a href="#audio">Audio</a><a href="#team">Team</a><a href="#life">Work</a><a href="#contact">Contact</a>
+  </div>
+  <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu"><a href="#about">About</a><a href="#work">Film</a><a href="#audio">Audio</a><a href="#team">Team</a><a href="#life">Work</a><a href="#contact">Contact</a></div>
+
+<header class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-shade"></div>
+  <div class="hero-inner">
+    <div class="hero-year">INDEPENDENT PRODUCTION HOUSE · 2024</div>
+    <div class="hero-logo-wrap"><img class="hero-logo" src="assets/weamigoss-hero-logo.png" alt="Weamigoss Productions"></div>
+    <h1>We don't just make films.<br><span>We build worlds.</span></h1>
+    <div class="hero-actions">
+      <a class="btn primary" href="#work">Explore our work <b>↗</b></a>
+      <a class="text-btn" href="https://www.youtube.com/@Weamigoss" target="_blank">Weamigoss YouTube <b>→</b></a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>SCROLL</span><i></i></div>
+</header>
+
+<section id="about">
+<div class="container">
+  <div class="section-head"><div><div class="eyebrow">01 / About</div><h2>WEAMIGOSS</h2></div></div>
+  <div class="about-grid">
+    <div class="glass"><p class="lead">From recreation videos to short films, Weamigoss aims to create stories that connect with people while developing a distinctive cinematic identity.</p></div>
+    <div class="glass"><div class="eyebrow">Our world</div><h3 style="font-size:30px;margin:8px 0 12px">Film & Creative Production</h3><p class="muted">Short films, storytelling, direction, acting, cinematography, editing and visual design.</p></div>
+  </div>
+</div>
+</section>
+
+<section id="work">
+<div class="container">
+  <div class="section-head"><div><div class="eyebrow">02 / Our Work</div><h2>Films</h2></div><p class="lead">Released stories and projects currently in development.</p></div>
+  <div class="cards">
+    <article class="glass project">
+      <img src="assets/life-poster.jpeg" alt="LIFE poster">
+      <div class="project-body"><div class="eyebrow">Short Film</div><h3>LIFE</h3><p class="muted">A light-hearted story of an unemployed B.Tech graduate and his middle-class family — a heartfelt journey of love, expectations and family bonds.</p><div class="tags"><span class="tag">Released</span><span class="tag">Case Study</span></div><a class="btn" href="#life">View case study</a><a class="btn" href="https://youtu.be/vAPPHTSRr7w" target="_blank">Watch now ↗</a></div>
+    </article>
+    <article class="glass project">
+      <img src="assets/vote-poster.jpeg" alt="VOTE poster">
+      <div class="project-body"><div class="eyebrow">Short Film</div><h3>VOTE</h3><p class="muted">A Weamigoss short film with writing and direction by Soumith and cinematography/editing by Sreevanth.</p><div class="tags"><span class="tag">Released</span></div><a class="btn" href="https://youtu.be/k7YZ7BlGTyc?si=vLkrIYsznlSuczhn" target="_blank">Watch now ↗</a></div>
+    </article>
+  </div>
+  <div style="height:35px"></div>
+  <div class="eyebrow">Upcoming</div>
+  <div class="upcoming" style="margin-top:15px">
+    <div class="glass up-card"><div class="up-placeholder">UPDATES SOON</div><div class="year">2027</div><h3>B.Tech Boys</h3></div>
+    <div class="glass up-card"><img src="assets/skxak-poster.jpeg" alt="SKxAK poster" style="width:100%;border-radius:14px;margin-bottom:16px"><div class="year">2027</div><h3>SKxAK</h3><p class="muted">Pre-production under progress</p></div>
+    <div class="glass up-card"><div class="up-placeholder">UPDATES SOON</div><div class="year">2027</div><h3>Untitled Project</h3></div>
+  </div>
+</div>
+</section>
+
+<section id="achievements">
+<div class="container">
+  <div class="section-head"><div><div class="eyebrow">03 / Recognition</div><h2>Achievements</h2></div><p class="lead">A growing record of the work and recognition behind Weamigoss.</p></div>
+  <div class="achievement-card">
+    <div class="achievement-image">
+      <img src="assets/vote-achievement.jpg" alt="Weamigoss team receiving recognition for VOTE">
+    </div>
+    <div class="glass achievement-copy">
+      <div class="eyebrow">VOTE</div>
+      <h3 style="font-size:30px;margin:8px 0 10px">College First Prize</h3>
+      <p class="muted">VOTE received first prize at the college-level competition on National Voters Day.</p>
+      <div class="tags" style="margin-top:18px"><span class="tag">Recognition</span><span class="tag">VOTE</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="audio">
+<div class="container">
+  <div class="section-head"><div><div class="eyebrow">04 / Music Label</div><h2>Weamigoss Audio</h2></div></div>
+  <div class="audio">
+    <img src="assets/weamigoss-audio.jpeg" alt="Weamigoss Audio">
+    <div class="glass">
+      <p class="lead">The music label of Weamigoss, created for original songs and film music. Follow Weamigoss Audio for music releases and updates.</p>
+      <hr style="border:0;border-top:1px solid #ffffff12;margin:26px 0">
+      <div class="release-section">
+        <div class="eyebrow">Released Singles &amp; Tracks</div>
+        <h3>Our released music</h3>
+        <div class="release-grid">
+          <article class="release-card">
+            <div class="eyebrow">Short Film</div>
+            <h4>LIFE OST</h4>
+            <p class="track-by">Composed &amp; Produced by Chandu Punyamanthula</p>
+            <div class="listen-wrap">
+              <span class="listen-label">Listen now</span>
+              <a class="platform-btn link-btn" href="https://music.youtube.com/playlist?list=OLAK5uy_l7WH_Ak4T3RmPpKHA1tnkhuzBmCQ9AYTU&amp;si=Vn94KmNNnk-EpgNO&amp;drli=1" target="_blank" rel="noopener">YouTube Music ↗</a>
+              <a class="platform-btn link-btn" href="https://youtube.com/playlist?list=OLAK5uy_mAHySlyeC8JmT9ptNQTOGMjhogOUkViqs&amp;si=ZJtvHZJGL3WcXewb" target="_blank" rel="noopener">YouTube ↗</a>
+              <a class="platform-btn link-btn" href="https://music.amazon.com.au/albums/B0HSW9XM38?marketplaceId=A39IBJ37TRP1C6&amp;musicTerritory=AU&amp;ref=dm_sh_HL7QyTh1AT5bTDYWbLTsAYhSo" target="_blank" rel="noopener">Amazon Music ↗</a>
+              <a class="platform-btn link-btn" href="https://open.spotify.com/album/3Ii6L11JxCkKGmnfVdy6Ki" target="_blank" rel="noopener">Spotify ↗</a>
+            </div>
+          </article>
+
+          <article class="release-card">
+            <div class="eyebrow">From “TRIGGERED”</div>
+            <h4>Crossed the Line</h4>
+            <p class="track-by">by Chandu Punyamanthula</p>
+            <div class="listen-wrap">
+              <span class="listen-label">Listen now</span>
+              <a class="platform-btn link-btn" href="https://open.spotify.com/track/7i5YAy0YUGMYjUd1XOcWIo?si=37768f01647d4b40" target="_blank" rel="noopener" aria-label="Crossed the Line on Spotify">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm4.13 12.47a.6.6 0 0 1-.83.2c-2.27-1.39-5.13-1.7-8.5-.93a.6.6 0 1 1-.27-1.17c3.69-.84 6.85-.5 9.4 1.06.29.18.38.56.2.84Zm1.12-2.5a.75.75 0 0 1-1.03.25c-2.6-1.6-6.57-2.06-9.65-1.13a.75.75 0 1 1-.44-1.43c3.52-1.07 7.94-.55 10.88 1.25.35.21.46.67.24 1.06Zm.1-2.61c-3.12-1.85-8.28-2.02-11.27-1.12a.9.9 0 1 1-.52-1.72c3.44-1.04 9.17-.84 12.76 1.29a.9.9 0 0 1-.97 1.55Z"/></svg> Spotify ↗
+              </a>
+              <a class="platform-btn link-btn" href="https://music.amazon.in/albums/B0HFJF5Q5C?trackAsin=B0HFJMSTFY&amp;do=play&amp;ts=1790341510&amp;ref=dm_sh_3WGu38tSJlM8aVOid709s5wAu" target="_blank" rel="noopener" aria-label="Crossed the Line on Amazon Music">Amazon Music ↗</a>
+              <a class="platform-btn link-btn" href="https://youtu.be/f6hzbl30dgo?si=-yPcHSmH0eV2Dbj7" target="_blank" rel="noopener" aria-label="Crossed the Line on YouTube Music">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.9 2.9 0 0 0-2.04-2.05C17.76 4.65 12 4.65 12 4.65s-5.76 0-7.56.5A2.9 2.9 0 0 0 2.4 7.2 30.2 30.2 0 0 0 1.9 12a30.2 30.2 0 0 0 .5 4.8 2.9 2.9 0 0 0 2.04 2.05c1.8.5 7.56.5 7.56.5s5.76 0 7.56-.5a2.9 2.9 0 0 0 2.04-2.05 30.2 30.2 0 0 0 .5-4.8 30.2 30.2 0 0 0-.5-4.8ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg> YouTube Music ↗
+              </a>
+            </div>
+          </article>
+
+          <article class="release-card btech-collection-card">
+            <div class="eyebrow">From “B.Tech Boys”</div>
+            <h4>B.Tech Boys — 2 Tracks</h4>
+            <p class="track-by">Music by Chandu Punyamanthula</p>
+            <div class="btech-track-list">
+              <div class="btech-track">
+                <div><strong>Soul of B.Tech boys</strong><span>Released single</span></div>
+                <a class="platform-btn link-btn" href="https://open.spotify.com/track/0NkfKvlP9Jaf9Grti4HCV6?si=d585d1705863437d" target="_blank" rel="noopener" aria-label="Soul of B.Tech boys on Spotify">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm4.13 12.47a.6.6 0 0 1-.83.2c-2.27-1.39-5.13-1.7-8.5-.93a.6.6 0 1 1-.27-1.17c3.69-.84 6.85-.5 9.4 1.06.29.18.38.56.2.84Zm1.12-2.5a.75.75 0 0 1-1.03.25c-2.6-1.6-6.57-2.06-9.65-1.13a.75.75 0 1 1-.44-1.43c3.52-1.07 7.94-.55 10.88 1.25.35.21.46.67.24 1.06Zm.1-2.61c-3.12-1.85-8.28-2.02-11.27-1.12a.9.9 0 1 1-.52-1.72c3.44-1.04 9.17-.84 12.76 1.29a.9.9 0 0 1-.97 1.55Z"/></svg> Spotify ↗
+                </a>
+              </div>
+              <div class="btech-track">
+                <div><strong>Rakesh Memories</strong><span>Released single</span></div>
+                <a class="platform-btn link-btn" href="https://open.spotify.com/track/5T9CDEQUQDxv4iXFjcaxAT?si=8dcfa6cd6f4c45cb" target="_blank" rel="noopener" aria-label="Rakesh Memories on Spotify">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm4.13 12.47a.6.6 0 0 1-.83.2c-2.27-1.39-5.13-1.7-8.5-.93a.6.6 0 1 1-.27-1.17c3.69-.84 6.85-.5 9.4 1.06.29.18.38.56.2.84Zm1.12-2.5a.75.75 0 0 1-1.03.25c-2.6-1.6-6.57-2.06-9.65-1.13a.75.75 0 1 1-.44-1.43c3.52-1.07 7.94-.55 10.88 1.25.35.21.46.67.24 1.06Zm.1-2.61c-3.12-1.85-8.28-2.02-11.27-1.12a.9.9 0 1 1-.52-1.72c3.44-1.04 9.17-.84 12.76 1.29a.9.9 0 0 1-.97 1.55Z"/></svg> Spotify ↗
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="team">
+<div class="container">
+  <div class="section-head"><div><div class="eyebrow">05 / The People</div><h2>Main Team</h2></div></div>
+  <div class="team">
+    <div class="glass person person-photo">
+      <img src="assets/sreevanth.jpg" alt="Sreevanth Konatham">
+      <div class="person-info"><h3>Sreevanth Konatham</h3><p>Founder · Writer · Director · Editor</p></div>
+    </div>
+    <div class="glass person person-photo">
+      <img src="assets/soumith.jpg" alt="Soumith Yeruva">
+      <div class="person-info"><h3>Soumith Yeruva</h3><p>CEO · Writer · Actor · Director</p></div>
+    </div>
+    <div class="glass person person-photo">
+      <img src="assets/divya.jpg" alt="Divya Alluri">
+      <div class="person-info"><h3>Divya Alluri</h3><p>Manager · Actor · Assistant Director</p></div>
+    </div>
+    <div class="glass person person-photo">
+      <img src="assets/rakesh.jpg" alt="Rakesh Vaddi">
+      <div class="person-info"><h3>Rakesh Vaddi</h3><p>Actor · DOP</p></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="container">
+  <div class="section-head"><div><div class="eyebrow">06 / Our Craft</div><h2>What we create</h2></div></div>
+  <div class="craft">
+    <div class="glass"><h3>Storytelling</h3><p class="muted">Writing & screenplays.</p></div>
+    <div class="glass"><h3>Direction</h3><p class="muted">Bringing stories to life.</p></div>
+    <div class="glass"><h3>Cinematography</h3><p class="muted">Visual storytelling.</p></div>
+    <div class="glass"><h3>Editing</h3><p class="muted">Post-production and visual rhythm.</p></div>
+    <div class="glass"><h3>Acting</h3><p class="muted">Characters and performances.</p></div>
+    <div class="glass"><h3>Music</h3><p class="muted">Original music through Weamigoss Audio.</p></div>
+    <div class="glass"><h3>Visual Design</h3><p class="muted">Posters, titles and creative visuals.</p></div>
+    <div class="glass"><h3>Production</h3><p class="muted">Independent filmmaking from idea to screen.</p></div>
+  </div>
+</div>
+</section>
+
+<section id="life" class="case life-case"><div class="life-case-bg"></div>
+<div class="container">
+  <div class="section-head"><div><div class="eyebrow">07 / Case Study</div><h2>LIFE</h2></div><p class="lead">A film made with limited resources, countless nights and a team that believed in the story.</p></div>
+  <div class="case-grid">
+    <div class="glass"><h3>The Story</h3><p class="muted">Life is a light-hearted story of an unemployed B.Tech graduate and his middle-class family. A heartfelt journey of love, expectations, and family bonds.</p></div>
+    <div class="glass"><h3>The Idea</h3><p class="muted">Life is based on the lives of unemployed graduates in a middle-class family.</p></div>
+    <div class="glass"><h3>The Making</h3><p class="muted">This was the team's first proper short film. Lighting and filmmaking terminology were new to the team. The film was shot across almost 20 nights, usually from 7 PM to 11 PM and sometimes until 12 AM. Total cost was around ₹2,000.</p></div>
+    <div class="glass"><h3>Direction</h3><p class="muted"><strong>Soumith Yeruva — Writer & Director.</strong> His cool, cooperative approach and coordination helped the team. Despite confusion around a few scenes, he worked through the challenges and completed the film.</p></div>
+    <div class="glass"><h3>Cinematography</h3><p class="muted"><strong>Sreevanth Konatham & Rakesh Vaddi · Drone — Tarak.</strong> The entire film was shot at night and around 90% was indoors, making lighting a key challenge with limited equipment and resources.</p></div>
+    <div class="glass"><h3>Editing</h3><p class="muted"><strong>Sreevanth Konatham — Editor.</strong> Editing was a tough part of LIFE. The approximately 20-minute film was divided into four sections, roughly 25% each. Post-production took around one and a half months.</p></div>
+    <div class="glass"><h3>Music</h3><p class="muted"><strong>Chandu Punyamanthula — Music Composer & Producer.</strong> He worked for approximately one month without charging the production, contributing his time and passion to the project.</p></div>
+    <div class="glass"><h3>BTS</h3><p class="muted">Behind-the-scenes photos from the making of LIFE.</p><a href="#" class="bts-link" id="openBts">Watch BTS images here <span>↗</span></a></div>
+  </div>
+  <div style="margin-top:30px" class="glass">
+    <div class="eyebrow">Cast & Crew</div>
+    <div class="credits" style="margin-top:20px">
+      <p><strong>Written & Directed:</strong> Soumith Yeruva</p>
+      <p><strong>Produced:</strong> Divya Alluri</p>
+      <p><strong>Cast:</strong> Soumith Yeruva, Rakesh Vaddi, Divya Alluri, Jagadiswar, Neela, Sreevanth Konatham, Sampath Potta</p>
+      <p><strong>Music Composer & Producer:</strong> Chandu Punyamanthula</p>
+      <p><strong>Editor:</strong> Sreevanth Konatham</p>
+      <p><strong>DOP:</strong> Sreevanth K & Rakesh</p>
+      <p><strong>Drone:</strong> Tarak</p>
+      <p><strong>Sound Mixing:</strong> Spanith</p>
+      <p><strong>Dubbing Engineer:</strong> Parker</p>
+      <p><strong>Posters:</strong> Eswar Alluri & Afzal Khan</p>
+      <p><strong>Lights:</strong> Nived Naidu</p>
+    </div>
+  </div>
+
+  <div class="full-credits-toggle">
+    <details>
+      <summary>See Full Cast &amp; Crew <span>↗</span></summary>
+      <div class="full-credits-panel">
+        <div class="full-credit-group">
+          <div class="eyebrow">Cast</div>
+          <div class="full-credit-list portrait-credit-list">
+            <div class="portrait-credit"><img src="assets/soumith.jpg" alt="Soumith Yeruva"><div><strong>Soumith Yeruva</strong><span>Actor · Played Son</span></div></div>
+            <div class="portrait-credit"><img src="assets/rakesh.jpg" alt="Rakesh Vaddi"><div><strong>Rakesh Vaddi</strong><span>Actor · Played Father</span></div></div>
+            <div class="portrait-credit"><img src="assets/divya.jpg" alt="Divya Alluri"><div><strong>Divya Alluri</strong><span>Actor · Played Mother</span></div></div>
+            <div class="portrait-credit"><img src="assets/cast-crew/jagadiswar(1)_3x4.jpg" alt="Jagadiswar Neela"><div><strong>Jagadiswar Neela</strong><span>Actor · Played Friend</span></div></div>
+            <div class="portrait-credit"><img src="assets/sreevanth.jpg" alt="Sreevanth Konatham"><div><strong>Sreevanth Konatham</strong><span>Actor · Played Friend</span></div></div>
+            <div class="portrait-credit"><img src="assets/cast-crew/sampath_3x4.jpg" alt="Sampath Potta"><div><strong>Sampath Potta</strong><span>Actor · Played Lord Shiva</span></div></div>
+          </div>
+        </div>
+        <div class="full-credit-group">
+          <div class="eyebrow">Crew</div>
+          <div class="full-credit-list portrait-credit-list">
+            <div class="portrait-credit"><img src="assets/soumith.jpg" alt="Soumith Yeruva"><div><strong>Soumith Yeruva</strong><span>Writer &amp; Director</span></div></div>
+            <div class="portrait-credit"><img src="assets/divya.jpg" alt="Divya Alluri"><div><strong>Divya Alluri</strong><span>Producer</span></div></div>
+            <div class="portrait-credit"><img src="assets/cast-crew/chandu punyamanthula(1)_3x4.jpg" alt="Chandu Punyamanthula"><div><strong>Chandu Punyamanthula</strong><span>Music Composer &amp; Producer</span></div></div>
+            <div class="portrait-credit"><img src="assets/sreevanth.jpg" alt="Sreevanth Konatham"><div><strong>Sreevanth Konatham</strong><span>Editor · DOP</span></div></div>
+            <div class="portrait-credit"><img src="assets/rakesh.jpg" alt="Rakesh Vaddi"><div><strong>Rakesh Vaddi</strong><span>DOP</span></div></div>
+            <div class="portrait-credit"><img src="assets/cast-crew/tarak(1)_3x4.jpg" alt="Tarak"><div><strong>Tarak</strong><span>Drone</span></div></div>
+            <div class="portrait-credit"><img src="assets/cast-crew/spanith(1)_3x4.jpg" alt="Spanith"><div><strong>Spanith</strong><span>Sound Mixing</span></div></div>
+            <div class="portrait-credit"><div class="portrait-placeholder"></div><div><strong>Parker</strong><span>Dubbing Engineer</span></div></div>
+            <div class="portrait-credit"><img src="assets/cast-crew/eswar varam(1)_3x4.jpg" alt="Eswar Alluri"><div><strong>Eswar Alluri</strong><span>Poster Design</span></div></div>
+            <div class="portrait-credit"><img src="assets/cast-crew/afzal khan(1)_3x4.jpg" alt="Afzal Khan"><div><strong>Afzal Khan</strong><span>Poster Design</span></div></div>
+            <div class="portrait-credit"><img src="assets/cast-crew/nived_3x4.jpg" class="portrait-nived" alt="Nived Naidu"><div><strong>Nived Naidu</strong><span>Lights</span></div></div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div style="text-align:center;margin-top:40px">
+    <div class="eyebrow">Watch the film</div>
+    <h2 style="margin:12px 0 20px">LIFE</h2>
+    <a class="btn" href="https://youtu.be/vAPPHTSRr7w" target="_blank">Watch Full Film</a>
+    <a class="btn" href="https://youtu.be/_ixWVjtm0Jw" target="_blank">Watch Teaser</a>
+  </div>
+</div>
+</div></section>
+
+<section id="contact">
+<div class="container">
+  <div class="glass" style="text-align:center;padding:70px 25px">
+    <div class="eyebrow">08 / Connect</div>
+    <h2>Passionate enough to act?</h2>
+    <p class="lead" style="margin:18px auto 24px">Let's create something worth remembering.</p>
+    <a class="btn" href="https://www.instagram.com/weamigoss/" target="_blank">Instagram @weamigoss</a>
+    <a class="btn" href="https://www.youtube.com/@Weamigoss" target="_blank">YouTube</a>
+    <a class="btn" href="mailto:weamigoss@gmail.com">weamigoss@gmail.com</a>
+  </div>
+</div>
+</section>
+
+<div class="bts-modal" id="btsModal" aria-hidden="true">
+  <div class="bts-modal-card" role="dialog" aria-modal="true" aria-labelledby="btsTitle">
+    <div class="bts-modal-head"><div><div class="eyebrow">Behind The Scenes</div><h2 id="btsTitle" style="font-size:32px;margin-top:6px">LIFE BTS</h2></div><button class="bts-close" id="closeBts" type="button" aria-label="Close BTS gallery">×</button></div>
+    <div class="bts-empty"><div><div style="font-size:22px;color:#ddd;margin-bottom:8px">BTS images will appear here</div><div>Add the BTS photos later and they can be placed in this gallery.</div></div></div>
+  </div>
+</div>
+
+<footer>
+<div class="container footer-row">
+  <div><img src="assets/weamigoss-logo-transparent.png" alt="Weamigoss Productions" style="width:190px;margin-bottom:12px"><div class="small">Film · Music · Stories · Visuals</div></div>
+  <div class="small" style="align-self:end">© 2024 WEAMIGOSS PRODUCTIONS. ALL RIGHTS RESERVED.</div>
+</div>
+</footer>
+
+<script>
+(() => {
+  const life = document.querySelector('.life-case');
+  if (!life) return;
+  const details = life.querySelector('.full-credits-toggle details');
+  const summary = details?.querySelector('summary');
+  const panel = details?.querySelector('.full-credits-panel');
+  if (!details || !summary || !panel) return;
+
+  // Smooth custom accordion: measure after the open state is applied so opening
+  // animates as reliably as closing.
+  details.open = true;
+  details.classList.remove('is-open');
+  panel.style.maxHeight = '0px';
+  panel.style.opacity = '0';
+  panel.style.transform = 'translateY(-12px)';
+  panel.style.paddingTop = '0px';
+  panel.style.paddingBottom = '0px';
+  panel.style.transition = 'none';
+
+  const setState = (open, animate = true) => {
+    if (!animate) {
+      details.classList.toggle('is-open', open);
+      life.classList.toggle('cast-open', open);
+      summary.setAttribute('aria-expanded', String(open));
+      panel.style.transition = 'none';
+      panel.style.paddingTop = open ? (window.innerWidth <= 700 ? '22px' : '30px') : '0px';
+      panel.style.paddingBottom = open ? (window.innerWidth <= 700 ? '22px' : '30px') : '0px';
+      panel.style.maxHeight = open ? panel.scrollHeight + 'px' : '0px';
+      panel.style.opacity = open ? '1' : '0';
+      panel.style.transform = open ? 'translateY(0)' : 'translateY(-12px)';
+      return;
+    }
+
+    panel.style.transition = 'max-height .9s cubic-bezier(.22,.61,.36,1), opacity .62s ease, transform .9s cubic-bezier(.22,.61,.36,1), padding .9s cubic-bezier(.22,.61,.36,1)';
+
+    if (open) {
+      details.classList.add('is-open');
+      life.classList.add('cast-open');
+      summary.setAttribute('aria-expanded', 'true');
+      panel.style.paddingTop = window.innerWidth <= 700 ? '22px' : '30px';
+      panel.style.paddingBottom = window.innerWidth <= 700 ? '22px' : '30px';
+      panel.style.maxHeight = '0px';
+      panel.style.opacity = '0';
+      panel.style.transform = 'translateY(-12px)';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        panel.style.opacity = '1';
+        panel.style.transform = 'translateY(0)';
+      }));
+    } else {
+      details.classList.remove('is-open');
+      life.classList.remove('cast-open');
+      summary.setAttribute('aria-expanded', 'false');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      requestAnimationFrame(() => {
+        panel.style.paddingTop = '0px';
+        panel.style.paddingBottom = '0px';
+        panel.style.maxHeight = '0px';
+        panel.style.opacity = '0';
+        panel.style.transform = 'translateY(-12px)';
+      });
+    }
+  };
+
+  summary.addEventListener('click', (event) => {
+    event.preventDefault();
+    setState(!details.classList.contains('is-open'));
+  });
+
+  window.addEventListener('resize', () => {
+    if (details.classList.contains('is-open')) {
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
+  });
+
+  setState(false, false);
+})();
+</script>
+
+<script>
+(() => {
+  const modal = document.getElementById('btsModal');
+  const open = document.getElementById('openBts');
+  const close = document.getElementById('closeBts');
+  if (!modal || !open || !close) return;
+  const setOpen = (state) => {
+    modal.classList.toggle('is-open', state);
+    modal.setAttribute('aria-hidden', String(!state));
+    document.body.style.overflow = state ? 'hidden' : '';
+  };
+  open.addEventListener('click', e => { e.preventDefault(); setOpen(true); });
+  close.addEventListener('click', () => setOpen(false));
+  modal.addEventListener('click', e => { if (e.target === modal) setOpen(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+})();
+</script>
+
+<script>
+(function(){
+ const btn=document.querySelector('.mobile-menu-btn');
+ const menu=document.getElementById('mobileMenu');
+ if(!btn||!menu) return;
+ btn.addEventListener('click',()=>{
+   const open=menu.classList.toggle('is-open');
+   btn.setAttribute('aria-expanded',open?'true':'false');
+   btn.textContent=open?'×':'☰';
+ });
+ menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('is-open');btn.setAttribute('aria-expanded','false');btn.textContent='☰';}));
+})();
+</script>
+</body>
+</html>
